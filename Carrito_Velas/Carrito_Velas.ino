@@ -21,7 +21,7 @@
 #define lineaDer2 1
 
 //motores
-#define enableA 8
+#define enableA 9
 #define adelanteA 7
 #define atrasA 6
 #define adelanteB 5
@@ -30,7 +30,8 @@
 
 //ventilador
 #define apa 29
-
+int velA = 50;
+int velB = 55;
 void setup() {
   pinMode(ultra_echo_at, INPUT);
   pinMode(ultra_echo_ad, INPUT);
@@ -61,25 +62,155 @@ void setup() {
 }
 
 void loop() {
-  //Blanco entre 500 y 700 // Negro entre 900 y 1k
   int negro = analogRead(lineaCen);
-  Serial.println(negro);
+  delay(200);
+  arranque();
   while (!sensor()) {
-    Serial.println("aca estoy");
-  
-    if (analogRead(lineaCen) >= 900 && analogRead(lineaCen) <= 1000 ){
-      digitalWrite(enableB , 5);
-      digitalWrite(enableA , 5);
-      digitalWrite(adelanteA, 5);
-      digitalWrite(adelanteB, 5);
+    if (analogRead(lineaCen) >= (negro - 100) && analogRead(lineaCen) <= (negro + 100) ) {
+      adelante();
     } else {
-      digitalWrite(enableB , 0);
-      digitalWrite(enableA , 0);
-      digitalWrite(adelanteA, 0);
-      digitalWrite(adelanteB, 0);
+      apagar();
+      atras();
+      delay(100);
+      apagar();
+      delay(10);
+      arranque();
+      derecha();
+      delay(200);
+      apagar();
+      delay(25);
     }
-//  }
-}
+
+    if ( !(analogRead(lineaIzq1) >= (negro - 100) && analogRead(lineaIzq1) <= (negro + 100)) ) {
+
+      atras();
+      delay(200);
+      apagar();
+      delay(30);
+      arranque();
+      derecha();
+      delay(200);
+      apagar();
+      delay(25);
+    }
+
+    if ( !(analogRead(lineaIzq2) >= (negro - 100) && analogRead(lineaIzq2) <= (negro + 100)) ) {
+
+      atras();
+      delay(200);
+      apagar();
+      delay(30);
+      arranque();
+      derecha();
+      delay(200);
+      apagar();
+      delay(25);
+    }
+
+    if ( !(analogRead(lineaDer1) >= (negro - 100) && analogRead(lineaDer1) <= (negro + 100)) ) {
+
+      atras();
+      delay(200);
+      apagar();
+      delay(30);
+      arranque();
+      izquierda();
+      delay(200);
+      apagar();
+      delay(25);
+    }
+
+    if ( !(analogRead(lineaDer2) >= (negro - 100) && analogRead(lineaDer2) <= (negro + 100)) ) {
+      atras();
+      delay(200);
+      apagar();
+      delay(30);
+      arranque();
+      izquierda();
+      delay(200);
+      apagar();
+      delay(25);
+    }
+  }
+
+     if((digitalRead(s_t1)==1||digitalRead(s_t2))&& digitalRead(s_t3)){
+      digitalWrite(apa,1);
+        izquierda();
+        delay(100);
+        adelante();
+        while((digitalRead(s_t3)==1 && digitalRead(s_t4)==1 && digitalRead(s_t2)==1) || (digitalRead(s_t3)==1 && digitalRead(s_t4)==1) || (digitalRead(s_t4)==1 && digitalRead(s_t2)==1) ){
+          apagar();
+          digitalWrite(apa,1);
+          delay(300);
+          //digitalWrite(apa,0);
+          adelante();
+          delay(80);
+        }
+        apagar();
+        digitalWrite(apa,0);
+
+        //...
+      }
+  
+       if((digitalRead(s_t1)==1||digitalRead(s_t2))&& !(digitalRead(s_t3) ==1)){
+        digitalWrite(apa,1);
+         izquierda();
+          delay(100);
+          adelante();
+          while((digitalRead(s_t3)==1 && digitalRead(s_t4)==1 && digitalRead(s_t2)==1) || (digitalRead(s_t3)==1 && digitalRead(s_t4)==1) || (digitalRead(s_t4)==1 && digitalRead(s_t2)==1) ){
+            apagar();
+            digitalWrite(apa,1);
+            delay(300);
+            //digitalWrite(apa,0);
+            adelante();
+            delay(80);
+          }
+          apagar();
+          digitalWrite(apa,0);
+
+          //...     }
+    
+       }
+  
+     if((digitalRead(s_t4)==1||digitalRead(s_t5))&& (digitalRead(s_t3) ==1) ){
+      digitalWrite(apa,1);
+          derecha();
+          delay(100);
+          adelante();
+          while((digitalRead(s_t3)==1 && digitalRead(s_t4)==1 && digitalRead(s_t2)==1) || (digitalRead(s_t3)==1 && digitalRead(s_t4)==1) || (digitalRead(s_t4)==1 && digitalRead(s_t2)==1) ){
+            apagar();
+            digitalWrite(apa,1);
+            delay(300);
+            //digitalWrite(apa,0);
+            adelante();
+            delay(80);
+          }
+          apagar();
+          digitalWrite(apa,0);
+  
+      }
+  
+     if((digitalRead(s_t4)==1||digitalRead(s_t5))&& !(digitalRead(s_t3) ==1) ){
+        //...
+         digitalWrite(apa,1);
+         derecha();
+          delay(100);
+          adelante();
+          while((digitalRead(s_t3)==1 && digitalRead(s_t4)==1 && digitalRead(s_t2)==1) || (digitalRead(s_t3)==1 && digitalRead(s_t4)==1) || (digitalRead(s_t4)==1 && digitalRead(s_t2)==1) ){
+            apagar();
+            digitalWrite(apa,1);
+            delay(300);
+            //digitalWrite(apa,0);
+            adelante();
+            delay(80);
+          }
+          apagar();
+          digitalWrite(apa,0);
+
+          //...     }
+    
+  
+      }
 }
 
 bool sensor() {
@@ -100,4 +231,54 @@ bool sensor() {
     return true;
   }
   return false;
+}
+
+void adelante() {
+  analogWrite(enableA, velA);
+  digitalWrite(adelanteA, 1);
+  analogWrite(enableB, velB);
+  digitalWrite(adelanteB, 1);
+}
+
+void atras() {
+  analogWrite(enableA, 70);
+  digitalWrite(atrasA, 1);
+  analogWrite(enableB,  77);
+  digitalWrite(atrasB, 1);
+  delay(100);
+}
+
+void derecha() {
+  analogWrite(enableA, velA);
+  digitalWrite(adelanteA, 1);
+  analogWrite(enableB, 0);
+  digitalWrite(adelanteB, 0);
+}
+
+void izquierda() {
+  analogWrite(enableA, 0);
+  digitalWrite(adelanteA, 0);
+  analogWrite(enableB, velB);
+  digitalWrite(adelanteB, 1);
+}
+
+void apagar() {
+  analogWrite(enableA, 0);
+  digitalWrite(adelanteA, 0);
+  analogWrite(enableB, 0);
+  digitalWrite(adelanteB, 0);
+  digitalWrite(atrasA, 0);
+  digitalWrite(atrasB, 0);
+}
+
+void arranque() {
+  analogWrite(enableA, 70);
+  digitalWrite(adelanteA, 1);
+  analogWrite(enableB, 77);
+  digitalWrite(adelanteB, 1);
+  delay(100);
+}
+
+void apagarVelas() {
+
 }
