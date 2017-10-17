@@ -1,4 +1,5 @@
 //sensores de calor derecha a izquierda
+
 #define s_t1 36
 #define s_t2 34
 #define s_t3 32
@@ -9,7 +10,6 @@
 //ultrasonido
 #define ultra_trig_at 24
 #define ultra_echo_at 25
-
 #define ultra_trig_ad 26
 #define ultra_echo_ad 27
 
@@ -30,8 +30,11 @@
 
 //ventilador
 #define apa 29
+
+//Velocidad general del carro , variables globales para modificar la velocidad rapidamente
 int velA = 50;
 int velB = 55;
+
 void setup() {
   pinMode(ultra_echo_at, INPUT);
   pinMode(ultra_echo_ad, INPUT);
@@ -67,8 +70,8 @@ void loop() {
   arranque(); // Arranque 
   while (!sensor()) { //Mientras no detecte calor entra a este ciclo
     if (analogRead(lineaCen) >= (negro - 100) && analogRead(lineaCen) <= (negro + 100) ) {  //Se establece una tolerancia para el color
-      adelante();
-    } else {
+      adelante(); // El carro se mueve hacia adelante
+    } else {//Si encuentra blanco , se detiene y retrocede y gira hacia la derecha
       apagar();
       atras();
       delay(100);
@@ -81,7 +84,7 @@ void loop() {
       delay(25);
     }
 
-    if ( !(analogRead(lineaIzq1) >= (negro - 100) && analogRead(lineaIzq1) <= (negro + 100)) ) {
+    if ( !(analogRead(lineaIzq1) >= (negro - 100) && analogRead(lineaIzq1) <= (negro + 100)) ) { //Si encuentra blanco a la izquierda , retrocede y se mueve a la derecha
 
       atras();
       delay(200);
@@ -94,7 +97,7 @@ void loop() {
       delay(25);
     }
 
-    if ( !(analogRead(lineaIzq2) >= (negro - 100) && analogRead(lineaIzq2) <= (negro + 100)) ) {
+    if ( !(analogRead(lineaIzq2) >= (negro - 100) && analogRead(lineaIzq2) <= (negro + 100)) ) { //Si encuentra blanco en el sensor interno de la izquierda retrocede y se mueve a la derecha
 
       atras();
       delay(200);
@@ -107,7 +110,7 @@ void loop() {
       delay(25);
     }
 
-    if ( !(analogRead(lineaDer1) >= (negro - 100) && analogRead(lineaDer1) <= (negro + 100)) ) {
+    if ( !(analogRead(lineaDer1) >= (negro - 100) && analogRead(lineaDer1) <= (negro + 100)) ) {//Si encuentra blanco a la derecha retrocede y se mueve a la izquierda
 
       atras();
       delay(200);
@@ -120,7 +123,7 @@ void loop() {
       delay(25);
     }
 
-    if ( !(analogRead(lineaDer2) >= (negro - 100) && analogRead(lineaDer2) <= (negro + 100)) ) {
+    if ( !(analogRead(lineaDer2) >= (negro - 100) && analogRead(lineaDer2) <= (negro + 100)) ) { //Si encuentra blanco en el sensor interno de la derecha , retrocede y se mueve a la izquierda
       atras();
       delay(200);
       apagar();
@@ -133,12 +136,12 @@ void loop() {
     }
   }
 
-     if((digitalRead(s_t1)==1||digitalRead(s_t2))&& digitalRead(s_t3)){
+     if((digitalRead(s_t1)==1||digitalRead(s_t2))&& digitalRead(s_t3)){ // Si alguno de los sensores de la derecha detecta calor , gira y enciende el ventilador
       digitalWrite(apa,1);
         izquierda();
         delay(100);
         adelante();
-        while((digitalRead(s_t3)==1 && digitalRead(s_t4)==1 && digitalRead(s_t2)==1) || (digitalRead(s_t3)==1 && digitalRead(s_t4)==1) || (digitalRead(s_t4)==1 && digitalRead(s_t2)==1) ){
+        while((digitalRead(s_t3)==1 && digitalRead(s_t4)==1 && digitalRead(s_t2)==1) || (digitalRead(s_t3)==1 && digitalRead(s_t4)==1) || (digitalRead(s_t4)==1 && digitalRead(s_t2)==1) ){ // Mientras esta detectando calor en el centro , enciende el ventilador y lo apaga
           apagar();
           digitalWrite(apa,1);
           delay(300);
@@ -152,12 +155,12 @@ void loop() {
         //...
       }
   
-       if((digitalRead(s_t1)==1||digitalRead(s_t2))&& !(digitalRead(s_t3) ==1)){
+       if((digitalRead(s_t1)==1||digitalRead(s_t2))&& !(digitalRead(s_t3) ==1)){//Gira hacia la izquierda mientras el sensor de la mitad detecte calor enciende el ventilador y se mueve hacia adelante
         digitalWrite(apa,1);
          izquierda();
           delay(100);
           adelante();
-          while((digitalRead(s_t3)==1 && digitalRead(s_t4)==1 && digitalRead(s_t2)==1) || (digitalRead(s_t3)==1 && digitalRead(s_t4)==1) || (digitalRead(s_t4)==1 && digitalRead(s_t2)==1) ){
+          while((digitalRead(s_t3)==1 && digitalRead(s_t4)==1 && digitalRead(s_t2)==1) || (digitalRead(s_t3)==1 && digitalRead(s_t4)==1) || (digitalRead(s_t4)==1 && digitalRead(s_t2)==1) ){//Mientras esta detectando calor en el centro , enciende el ventilador.
             apagar();
             digitalWrite(apa,1);
             delay(300);
@@ -172,12 +175,12 @@ void loop() {
     
        }
   
-     if((digitalRead(s_t4)==1||digitalRead(s_t5))&& (digitalRead(s_t3) ==1) ){
+     if((digitalRead(s_t4)==1||digitalRead(s_t5))&& (digitalRead(s_t3) ==1) ){//Si alguno de los sensores de la derecha detecta calor , gira hacia la derecha y va hacia adelante
       digitalWrite(apa,1);
           derecha();
           delay(100);
           adelante();
-          while((digitalRead(s_t3)==1 && digitalRead(s_t4)==1 && digitalRead(s_t2)==1) || (digitalRead(s_t3)==1 && digitalRead(s_t4)==1) || (digitalRead(s_t4)==1 && digitalRead(s_t2)==1) ){
+          while((digitalRead(s_t3)==1 && digitalRead(s_t4)==1 && digitalRead(s_t2)==1) || (digitalRead(s_t3)==1 && digitalRead(s_t4)==1) || (digitalRead(s_t4)==1 && digitalRead(s_t2)==1) ){ //Mientras que este detectando calor enciende el ventilador
             apagar();
             digitalWrite(apa,1);
             delay(300);
@@ -185,11 +188,12 @@ void loop() {
             adelante();
             delay(80);
           }
-          apagar();
-          digitalWrite(apa,0);
+          apagar(); //Se apaga el carro
+          digitalWrite(apa,0); //Se apaga el ventilador
   
       }
   
+  //Si detecta calor en la derecha , aunque el sensor del medio no lo haga, gira a la derecha , va hacia adelante y enciende el ventilador hasta apagar la vela
      if((digitalRead(s_t4)==1||digitalRead(s_t5))&& !(digitalRead(s_t3) ==1) ){
         //...
          digitalWrite(apa,1);
@@ -204,8 +208,8 @@ void loop() {
             adelante();
             delay(80);
           }
-          apagar();
-          digitalWrite(apa,0);
+          apagar(); //Se apaga el carro
+          digitalWrite(apa,0); // Se apaga el ventilador
 
           }
     
