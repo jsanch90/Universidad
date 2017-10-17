@@ -62,11 +62,11 @@ void setup() {
 }
 
 void loop() {
-  int negro = analogRead(lineaCen);
+  int negro = analogRead(lineaCen);  //Calibra el color inicial en este caso negro 
   delay(200);
-  arranque();
-  while (!sensor()) {
-    if (analogRead(lineaCen) >= (negro - 100) && analogRead(lineaCen) <= (negro + 100) ) {
+  arranque(); // Arranque 
+  while (!sensor()) { //Mientras no detecte calor entra a este ciclo
+    if (analogRead(lineaCen) >= (negro - 100) && analogRead(lineaCen) <= (negro + 100) ) {  //Se establece una tolerancia para el color
       adelante();
     } else {
       apagar();
@@ -207,12 +207,13 @@ void loop() {
           apagar();
           digitalWrite(apa,0);
 
-          //...     }
+          }
     
   
       }
 }
 
+//Este metodo determina si alguno de los sensores termicos ha detectado calor
 bool sensor() {
 
   if (digitalRead(s_t1) == 1) {
@@ -233,6 +234,8 @@ bool sensor() {
   return false;
 }
 
+// Este metodo hace que el carro vaya derecho 
+
 void adelante() {
   analogWrite(enableA, velA);
   digitalWrite(adelanteA, 1);
@@ -240,6 +243,7 @@ void adelante() {
   digitalWrite(adelanteB, 1);
 }
 
+// Este metodo hace que el carro retroceda durante 0.1 segundos
 void atras() {
   analogWrite(enableA, 70);
   digitalWrite(atrasA, 1);
@@ -248,6 +252,8 @@ void atras() {
   delay(100);
 }
 
+//Este metodo gira hacia la derecha,  apagando la rueda de la derecha y usando la velocidad general del carro para la otra rueda
+
 void derecha() {
   analogWrite(enableA, velA);
   digitalWrite(adelanteA, 1);
@@ -255,12 +261,16 @@ void derecha() {
   digitalWrite(adelanteB, 0);
 }
 
+//Este metodo gira hacia la izquierda apagando la rueda de la izquierda y usando la velocidad general del carro para la otra rueda
+
 void izquierda() {
   analogWrite(enableA, 0);
   digitalWrite(adelanteA, 0);
   analogWrite(enableB, velB);
   digitalWrite(adelanteB, 1);
 }
+
+//Este metodo apaga los motores del carro
 
 void apagar() {
   analogWrite(enableA, 0);
@@ -271,14 +281,12 @@ void apagar() {
   digitalWrite(atrasB, 0);
 }
 
+//Este metodo arranca el carro con una velocidad mas alta de la requerida para moverse por el circuito 
+
 void arranque() {
   analogWrite(enableA, 70);
   digitalWrite(adelanteA, 1);
   analogWrite(enableB, 77);
   digitalWrite(adelanteB, 1);
   delay(100);
-}
-
-void apagarVelas() {
-
 }
