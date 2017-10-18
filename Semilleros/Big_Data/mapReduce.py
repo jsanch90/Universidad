@@ -1,0 +1,31 @@
+# -*- coding: utf-8 -*-
+
+def leer():
+    x = open("dataset.csv")
+    contenido = x.readlines()
+    return contenido
+
+
+def mapReduce(dataset):
+    lista = list()
+    for i in dataset:
+        c = i.split(',')
+        if c[0][:-1].isupper():
+            lista.append(c[0])
+
+    diccionario = dict()
+    print "Esta es la lista"
+    print len(lista)
+    for i in lista:
+        if i in diccionario:
+            diccionario[i]=diccionario[i]+1
+        else:
+            diccionario[i]=1
+
+
+    return diccionario
+
+print(mapReduce(leer()))
+    
+
+    

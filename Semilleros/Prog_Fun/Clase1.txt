@@ -1,0 +1,3 @@
+-Nombres de funciones y parametros empiezan con minuscula.
+-hoogle
+-hayoo

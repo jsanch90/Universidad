@@ -1,0 +1,19 @@
+#import mrjobs
+from mrjob.job import MRJob
+
+#Simple word count example
+#Usage [python path] word_count.py --python-bin [python path] -r hadoop [input dir] --output-dir [output dir]
+class WordCount(MRJob):
+      #map, take line return (word,1)
+        def mapper(self, _, line):
+            for w in line.split():
+                      yield w,1
+
+                        #reduce, take key and list(1, 1, 1, 1) return (k, total)
+                          def reducer(self, key, values):
+                                  yield key, sum(values)
+
+
+                                  #Main method
+                                  if __name__ == '__main__':
+                                        WordCount.run()

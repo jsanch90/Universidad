@@ -1,0 +1,6 @@
+IP Cluster: 192.168.10.75
+Password: cluster2017.
+
+Conectarse por ssh (ssh jsanch90@ipCluster)
+
+Despues de estar conectado lanzar el comando 'kinit'

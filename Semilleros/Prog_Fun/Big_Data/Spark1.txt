@@ -1,0 +1,4 @@
+RDD(Resilent Distributed Dataset)
+
+Spark es la verga
+

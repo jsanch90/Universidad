@@ -1,0 +1,17 @@
+
+                                    |-----> Biblioteca
+MPI( Message pasage interface) ---> |-----> Protocolo
+                                    |-----> pseudocompilador
+
+
+             M (Maestro) da las instrucciones de procesamiento, orquestdor
+	     |
+	    | |
+	   |   |
+  (Escalvo)S   S(Esclavo)
+
+
+Se deben usar operaciones simetricas y conmutativas.
+
+
+

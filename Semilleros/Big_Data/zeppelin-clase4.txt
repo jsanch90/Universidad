@@ -1,0 +1,18 @@
+       zeppelin  <------- Enter point
+       <<Web>>
+          |
+	  |
+	spark    -------> Yarn
+     <<Engine>>
+          |
+	  |
+	hive
+  <<Mestastorage>>
+          |
+	  |
+	hbase
+       <<DB>>
+          |
+	  |
+	hdfs
+     <<Storage>>

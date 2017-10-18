@@ -1,0 +1,16 @@
+htop --> ver uso de recueros del pc
+Ley de Amdahl --> hay limite de estancamiento del paralelismo
+
+Hardware paralelo:
+
+-dentro del cpu hay hardware paralelo, y hay alu's que pieden hacer 2 operaciones al tiempo.
+
+-Tambien se pueden usar hilos para paralelizar programas.
+
+-Tarjetas graficas (NVidia) CUDA (Matrices).
+
+-Aceleradoras (Xeon phi (128 cores 4 hilos por core)) (Virtualizaciones)
+
+-Cluster: Procesos MPI
+
+Ejercicio : Metodo Montecarlo Para calcular pi(3.14)
