@@ -12,12 +12,12 @@ __docformat__ = "restructuredtext"
 
 graph=Graph()
 n = 106
-sett=set()
-settt=set()
-def leer(ruta):
+thisIsSource = set()
+thisIsDestination=set()
+def read(root):
     """Este metodo se encarga de leer segmento por segmento y enviar cada segmento al metodo donde se insertaran al grafo"""
     first = time()
-    f=open(ruta)
+    f=open(root)
     for i in f:
         if i == "\n":
             continue
@@ -34,15 +34,15 @@ def toKmers(string):
     for i in range(len(string)-(n+1)):
         source = string[i:i+n-1]
         destination = string[i+1:i+n]
-        sett.add(source)
-        settt.add(destination)
+        thisIsSource.add(source)
+        thisIsDestination.add(destination)
         graph.add_Arc(source,destination, "")
 
 def runPath():
     """Este metodo se encarga de recorrer el grafo desde su nodo inicial"""
-    r = sett - settt
-    h = r.pop()
-    graph.Run(h)
+    firstNode = thisIsSource - thisIsDestination
+    begin = firstNode.pop()
+    graph.Run(begin)
     graph.Codones()
     
 f1="AY325307ADN-segments.txt"
@@ -52,7 +52,7 @@ f4="80.txt"
 f5="180.txt"
 f6="450.txt"
 f7="1000.txt"
-leer(f1)
+read(f1)
 
 
 
