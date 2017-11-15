@@ -1,0 +1,47 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module codigoLateral</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>codigoLateral</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/josh/Documentos/U.Slll/Datos_ll/Proyecto/Entrega 1/Repo_Proyecto_Datos/dna/codigoFinal/codigoLateral.py">/home/josh/Documentos/U.Slll/Datos_ll/Proyecto/Entrega 1/Repo_Proyecto_Datos/dna/codigoFinal/codigoLateral.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-leer"><strong>leer</strong></a>(ruta)</dt><dd><tt>Este&nbsp;metodo&nbsp;se&nbsp;encarga&nbsp;de&nbsp;leer&nbsp;segmento&nbsp;por&nbsp;segmento&nbsp;y&nbsp;enviar&nbsp;cada&nbsp;segmento&nbsp;al&nbsp;metodo&nbsp;donde&nbsp;se&nbsp;inserttaran&nbsp;al&nbsp;grafo</tt></dd></dl>
+ <dl><dt><a name="-runPath"><strong>runPath</strong></a>()</dt><dd><tt>Este&nbsp;metodo&nbsp;se&nbsp;encarga&nbsp;de&nbsp;recorrer&nbsp;el&nbsp;grafo&nbsp;desde&nbsp;su&nbsp;nodo&nbsp;inicial</tt></dd></dl>
+ <dl><dt><a name="-time"><strong>time</strong></a>(...)</dt><dd><tt><a href="#-time">time</a>()&nbsp;-&gt;&nbsp;floating&nbsp;point&nbsp;number<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;current&nbsp;time&nbsp;in&nbsp;seconds&nbsp;since&nbsp;the&nbsp;Epoch.<br>
+Fractions&nbsp;of&nbsp;a&nbsp;second&nbsp;may&nbsp;be&nbsp;present&nbsp;if&nbsp;the&nbsp;system&nbsp;clock&nbsp;provides&nbsp;them.</tt></dd></dl>
+ <dl><dt><a name="-toKmers"><strong>toKmers</strong></a>(string)</dt><dd><tt>Este&nbsp;metodo&nbsp;recibe&nbsp;el&nbsp;segmento&nbsp;completo&nbsp;lo&nbsp;divide&nbsp;en&nbsp;K-Mers&nbsp;y&nbsp;lo&nbsp;agrega&nbsp;al&nbsp;grafo&nbsp;ademas&nbsp;cada&nbsp;nodo&nbsp;fuente&nbsp;y&nbsp;de&nbsp;destino&nbsp;es&nbsp;insertado&nbsp;en&nbsp;su&nbsp;respectivo&nbsp;conjunto</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__docformat__</strong> = 'restructuredtext'<br>
+<strong>f1</strong> = 'AY325307ADN-segments.txt'<br>
+<strong>f2</strong> = 'AB042837ADN.txt'<br>
+<strong>f3</strong> = '10.txt'<br>
+<strong>f4</strong> = '80.txt'<br>
+<strong>f5</strong> = '180.txt'<br>
+<strong>f6</strong> = '450.txt'<br>
+<strong>f7</strong> = '1000.txt'<br>
+<strong>graph</strong> = &lt;Graph.Graph instance&gt;<br>
+<strong>n</strong> = 106<br>
+<strong>sett</strong> = set(['aaaaaaaggactcaaacctttaccaccaactcccaaagctggtattct...actattttctgataccccctctccctctttcctaaacggcccgaattgt', 'aaaaaaatataaaaaccataagactcccttcatgactaacaggctaac...ataggagaactaatgctaaaatgagtaacttgggggcactaccccctcc', 'aaaaaaatcatcgctttctccacatcaagccaactaggactgataata...cggattagacctcccacaactagcattccttcacatttcaacccacgcc', 'aaaaaacattggtcttgtaaaccaaagactgaagaccccacctcttct...tttcctcagaaaaaaaggactcaaacctttaccaccaactcccaaagct', 'aaaaaagagccttttggctatataggaatggtgtgagccatgctctct...cttgggcttcatcgtctgagcacaccacatatttaccgtgggaatggat', 'aaaaaagctggccccgaaggactcgccctattacaactaaaagcctcc...aaccaacctgcacacaggattaatcaagacctacctgggatcctttgcc', ...])<br>
+<strong>settt</strong> = set(['aaaaaaaggactcaaacctttaccaccaactcccaaagctggtattct...actattttctgataccccctctccctctttcctaaacggcccgaattgt', 'aaaaaaatataaaaaccataagactcccttcatgactaacaggctaac...ataggagaactaatgctaaaatgagtaacttgggggcactaccccctcc', 'aaaaaaatcatcgctttctccacatcaagccaactaggactgataata...cggattagacctcccacaactagcattccttcacatttcaacccacgcc', 'aaaaaacattggtcttgtaaaccaaagactgaagaccccacctcttct...tttcctcagaaaaaaaggactcaaacctttaccaccaactcccaaagct', 'aaaaaagagccttttggctatataggaatggtgtgagccatgctctct...cttgggcttcatcgtctgagcacaccacatatttaccgtgggaatggat', 'aaaaaagctggccccgaaggactcgccctattacaactaaaagcctcc...aaccaacctgcacacaggattaatcaagacctacctgggatcctttgcc', ...])</td></tr></table>
+</body></html>
